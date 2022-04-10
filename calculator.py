@@ -25,6 +25,10 @@ def calculate():
     calc.delete(0, tk.END)
     calc.insert(0, eval(value))
 
+def clear():
+    calc.delete(0, tk.END)
+    calc.insert(0, '0')
+
 def make_digit_button(digit):
     return tk.Button(text=digit, bd=5, font=('Arial', 13), command=lambda : add_digit(digit))
 
@@ -36,6 +40,10 @@ def make_calc_button(operation):
     return tk.Button(text=operation, bd=5, font=('Arial', 13), fg='red',
                      command=calculate)
 
+
+def make_clear_button(operation):
+    return tk.Button(text=operation, bd=5, font=('Arial', 13), fg='red',
+                     command=clear)
 
 win = tk.Tk()
 win.geometry(f"250x285+100+100")
@@ -63,6 +71,7 @@ make_operation_button('*').grid(row=3, column=3, stick='wens', padx=5, pady=5)
 make_operation_button('/').grid(row=4, column=3, stick='wens', padx=5, pady=5)
 
 make_calc_button('=').grid(row=4, column=2, stick='wens', padx=5, pady=5)
+make_clear_button('C').grid(row=4, column=1, stick='wens', padx=5, pady=5)
 
 win.grid_columnconfigure(0, minsize=60)
 win.grid_columnconfigure(1, minsize=60)
