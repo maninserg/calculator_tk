@@ -1,4 +1,5 @@
 import tkinter as tk
+from tkinter import messagebox
 
 def add_digit(digit):
     value = calc.get() 
@@ -23,7 +24,15 @@ def calculate():
         operation = value[-1]
         value = value[:-1] + operation + value[:-1]
     calc.delete(0, tk.END)
-    calc.insert(0, eval(value))
+    try:
+        calc.insert(0, eval(value))
+    except (NameError, SyntaxError):
+        messagebox.showinfo('Alert', 'Have to type only digits')
+        calc.insert(0, '0')
+    except ZeroDivisionError:
+        messagebox.showinfo('Alert', 'Zero Division')
+        calc.insert(0, '0')
+
 
 def clear():
     calc.delete(0, tk.END)
