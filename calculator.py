@@ -45,10 +45,20 @@ def make_clear_button(operation):
     return tk.Button(text=operation, bd=5, font=('Arial', 13), fg='red',
                      command=clear)
 
+def press_key(event):
+    if event.char.isdigit():
+        add_digit(event.char)
+    elif event.char in '-+*/':
+        add_operation(event.char)
+    elif event.char == '\r':
+        calculate()
+
 win = tk.Tk()
 win.geometry(f"250x285+100+100")
 win['bg'] = '#33ffe6'
 win.title('Calculator')
+
+win.bind('<Key>', press_key)
 
 calc = tk.Entry(win, justify=tk.RIGHT, font=('Areal', 15), width=15)
 calc.insert(0, '0')
